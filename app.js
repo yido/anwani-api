@@ -8,6 +8,7 @@ var bodyParser   = require('body-parser');
 var debug        = require('debug')('anwani-project');
 var mongoose     = require('mongoose');
 var validator    = require('express-validator');
+var cors         = require('cors')
 
 var config       = require('./config');
 
@@ -41,6 +42,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //~ Set Validator ~//
 app.use(validator());
