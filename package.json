@@ -1,14 +1,27 @@
 {
-  "name": "anwani-api",
+  "name": "anwani-project-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Anwani proj implimentation in NodeJS and Mongodb",
   "main": "app.js",
   "directories": {
-    "yido": "yido"
+    "test": "test"
   },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+http://git.gebeya.com/node-capstone-1/yididiya.git"
+  },
   "author": "Yididiya",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/git.gebeya/node-capstone-1/issues"
+  },
+  "homepage": "https://github.com/git.gebeya/anwani#readme"
 }
