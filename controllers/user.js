@@ -31,6 +31,48 @@ exports.getAll = function getAllUsers(req, res, next) {
   workflow.emit('performRequest');
 };
 
+
+/**
+ * search User
+ */
+exports.searchUser = function searchUser(req, res, next) {
+  var workflow = new events.EventEmitter();
+  var query = req.params.query;
+  console.log('this is the query',query);
+
+  workflow.on('performRequest', function performRequest() {
+
+    var regexValue = '\.*' + query + '\.';
+    var exp = new RegExp(regexValue, 'i');
+
+    UserDal.getLightCollection(
+        {
+          "$or": [
+          {"username": exp},
+          {"profile.first_name": exp},
+          {"profile.middle_name": exp},
+          {"profile.last_name": exp}
+        ]
+        },
+        function callback(err, users) {
+          if (err) {
+            return next(err);
+          }
+          workflow.emit('respond', users);
+        })
+  });
+
+
+
+
+  workflow.on('respond', function (users) {
+    debug('users');
+    res.status(201);
+    res.json(users);
+  });
+  workflow.emit('performRequest');
+};
+
 /**
  * Create User
  *

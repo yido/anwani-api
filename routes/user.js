@@ -154,6 +154,55 @@ router.post('/logout', auth.logout);
  */
 router.get('/all', authorize(['admin']),  user.getAll);
 
+
+
+/**
+ * @api {get} /users/search/:query Find Users
+ * @apiGroup Users
+ * @apiSuccess {Object} user User object
+ * @apiSuccess {Number} user.id User id
+ * @apiSuccess {Number} user.username User username
+ * @apiSuccess {String} user.password User password
+ * @apiSuccess {String} user.user_type User user_type
+ * @apiSuccess {Object[]} shared_addresses shared addresses
+ * @apiSuccess {Date} user.updated_at Update's date
+ * @apiSuccess {Date} user.created_at Register's date
+ * @apiSuccessExample {json} Success
+ *  HTTP/1.1 200 OK
+ *		[ {
+ *			"_id" : ObjectId("590c4dadda53bd1db8c88ed1"),
+ *			"password" : "$2a$07$1YbUkcZFXqL3m9XV6OdIcOUDfp4WPTh2EDCG7fgXMWPa6zff4bSiu",
+ *			"username" : "0910303229",
+ *			"user_type" : "individual",
+ *			"last_modified" : ISODate("2017-05-05T10:18:25.546Z"),
+ *			"date_created" : ISODate("2017-05-05T10:02:21.038Z"),
+ *			"shared_addresses" : [
+ *				 {
+ *				 		"_id" : ObjectId("590c50cc3e981c4688fe0202"),
+ *				 		"name" : "FBI Church",
+ *				 		"picture" : "OPHYTT87PQBEAPe",
+ *				 		"is_main" : false,
+ *				 		"owner" : ObjectId("590c20fb8eb7d442b8e7040c"),
+ *				 		"loc" : {
+ *				 			"lon" : -989.877,
+ *				 			"lat" : -9943.0973
+ *				 		},
+ *				 		"date_modified" : ISODate("2017-05-05T10:15:40.099Z"),
+ *				 		"date_created" : ISODate("2017-05-05T10:15:40.099Z")
+ *			   }
+ *			],
+ *			"status" : "active",
+ *			"realm" : "user",
+ *			"__v" : 0,
+ *			"profile" : ObjectId("590c4dadda53bd1db8c88ed2")
+ *		}]
+ * @apiErrorExample {json} Address not found
+ *    HTTP/1.1 404 Not Found
+ * @apiErrorExample {json} Find error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+router.get('/search/:query', user.searchUser);
+
 // GET /users/:userId
 /**
  * @api {get} /users/:userId Find a User

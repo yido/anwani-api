@@ -148,10 +148,10 @@ router.get('/search/:query', address.searchAddress);
  * @apiErrorExample {json} Find error
  *    HTTP/1.1 500 Internal Server Error
  */
-router.get('/address/:userId', address.getAddressByUser);
+router.get('/byUser/:userId', address.getAddressByUser);
 
 /**
- * @api {get} /address/:userId Find Shared Addresses by User
+ * @api {get} /address/acquired/:userId Find Shared Addresses by User
  * @apiGroup Address
  * @apiParam {id} id User id
  * @apiSuccess {Object} address Address object
@@ -183,7 +183,7 @@ router.get('/address/:userId', address.getAddressByUser);
  * @apiErrorExample {json} Find error
  *    HTTP/1.1 500 Internal Server Error
  */
-router.get('/address/:userId', address.getSharedAddressByUser);
+router.get('/acquired/:userId', address.getSharedAddressByUser);
 
 /**
  * @api {post} /address/add Register a new Address
@@ -285,7 +285,7 @@ router.post('/add/:profileId', address.addAddress);
 router.post('/share/:addressId/:userId', address.shareAddress);
 
 /**
- * @api {delete} /address/:addressId Remove a shared address
+ * @api {delete} /address/removeShared/:addressId Remove a shared address
  * @apiGroup Address
  * @apiParam {id} id Address id
  * @apiSuccessExample {json} Success
@@ -293,11 +293,11 @@ router.post('/share/:addressId/:userId', address.shareAddress);
  * @apiErrorExample {json} Delete error
  *    HTTP/1.1 500 Internal Server Error
  */
-router.delete('/:addressId', address.removeSharedAddress);
+router.delete('/removeShared/:addressId', address.removeSharedAddress);
 
 
 /**
- * @api {put} /address/:addressId Update an Address
+ * @api {put} /address/ Update an Address
  * @apiGroup Address
  * @apiParam {id} id address id
  * @apiParamExample {json} Input
@@ -319,7 +319,7 @@ router.delete('/:addressId', address.removeSharedAddress);
  * @apiErrorExample {json} Update error
  *    HTTP/1.1 500 Internal Server Error
  */
-router.put('/:addressId', address.editAddress);
+router.post('/edit', address.editAddress);
 
 /**
  * @api {delete} /address/:addressId Remove an address

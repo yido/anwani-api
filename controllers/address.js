@@ -105,16 +105,16 @@ exports.searchAddress = function searchAddress(req, res, next) {
 exports.getAddressByUser = function getAddressByUser(req, res, next) {
     var workflow = new events.EventEmitter();
     var userId = req.params.userId;
-
     workflow.on('performRequest', function performRequest() {
-        UserDal.getCollection({
-                "user._id": userId
+        UserDal.get({
+                "_id": userId
             },
             function callback(err, user) {
                 if (err) {
                     return next(err);
                 }
-                workflow.emit('respond', user.profile.addresses);
+
+                workflow.emit('respond',user.profile.addresses);
             })
     });
     workflow.on('respond', function (addresss) {
@@ -133,8 +133,8 @@ exports.getSharedAddressByUser = function getSharedAddressByUser(req, res, next)
     var userId = req.params.userId;
 
     workflow.on('performRequest', function performRequest() {
-        UserDal.getCollection({
-                "user._id": userId
+        UserDal.get({
+                "_id": userId
             },
             function callback(err, user) {
                 if (err) {
@@ -160,7 +160,6 @@ exports.addAddress = function addAddress(req, res, next) {
     var workflow = new events.EventEmitter();
     var body = req.body;
     var profileId = req.params.profileId;
-    console.log('body',body);
 
     workflow.on('validateAddress', function validateAddress() {
         debug('validate Address');
@@ -342,8 +341,9 @@ exports.editAddress = function editAddress(req, res, next) {
 
     });
     workflow.on('editAddress', function editAddress() {
-        AddressDal.update({
-            _id : addressId ,
+        AddressDal.update( {
+            _id : body._id
+        },{
             name : body.name,
             picture :  body.picture,
             loc: body.loc,

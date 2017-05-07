@@ -52,7 +52,7 @@ exports.create = function create(addressData, cb) {
  * @param {Object} updates  Update data
  * @param {Function} cb Callback for once update is complete
  */
-exports.update = function update(query, updates,  cb) {
+exports.update = function update(query, updates, cb) {
     debug('updating address: ', query);
 
     var now = moment().toISOString();

@@ -14,8 +14,23 @@ var population = [{
     populate: {
         path: 'addresses'
         , model: 'Address'
+        , populate: {
+            path: 'owner'
+            , model: 'Profile'
+        }
     }
-}, {path: 'shared_addresses'}];
+}, {
+    path: 'shared_addresses', populate: {
+        path: 'owner'
+        , model: 'Profile'
+    }
+}];
+
+var light_population = [{
+    path: 'profile',
+    model:'Profile'
+}];
+
 
 /**
  * create a new user.
@@ -152,6 +167,30 @@ exports.getCollection = function getCollection(query, cb) {
 
     User.find(query)
         .populate(population)
+        .exec(function getUsersCollection(err, users) {
+            if (err) {
+                return cb(err);
+            }
+
+            return cb(null, users);
+        });
+
+};
+
+/**
+ * get a collection of users
+ *
+ * @desc get a collection of users from db
+ *
+ * @param {Object} query Query Object
+ * @param {Function} cb Callback for once fetch is complete
+ */
+exports.getLightCollection = function getLightCollection(query, cb) {
+    debug('fetching a collection of users');
+
+    User.find(query)
+        .populate(light_population)
+        .limit(6)
         .exec(function getUsersCollection(err, users) {
             if (err) {
                 return cb(err);
