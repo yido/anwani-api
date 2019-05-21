@@ -4,7 +4,7 @@ Develop NodeJS API for Anwani project that aims to solve lack of pinpoint physic
 Anwani targets for individual citizens, businesses and government.
 
 Physical Address for All
-For the first time, every African citizens whether they live in the city or in a hut somewhere in a village will have the oportunity to own a physical address.
+For the first time, every African citizens whether they live in the city or in a hut somewhere in a village will have the opportunity to own a physical address.
 
 Businesses
 Address can be provided by user to service providers, e.g. electric company to be able to service them more efficiently because they will find the address easier and faster.
